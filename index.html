@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            background: #e2d9b7;
+        }
+        
+        #container {
+            height: 450px;
+            width: 850px;
+            position: absolute;
+            transform-origin: 50% 50%;
+            margin: 0 auto;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+        
+        .expander {
+            position: absolute;
+            transform-origin: 50% 50%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="container">
+
+        <div class="expander"><img src="img/cloud1.png"></div>
+        <div class="expander"><img src="img/cloud2.png"></div>
+        <div class="expander"><img src="img/cloud3.png"></div>
+        <div class="expander"><img src="img/cloud2.png"></div>
+        <div class="expander"><img src="img/cloud3.png"></div>
+        <div class="expander"><img src="img/cloud1.png"></div>
+        <div class="expander"><img src="img/cloud2.png"></div>
+        <div class="expander"><img src="img/cloud3.png"></div>
+        <div class="expander"><img src="img/cloud1.png"></div>
+
+
+    </div>
+    <script>
+        let theta = 0;
+        let r = 10;
+        let hover = window.innerWidth;
+        const list = document.getElementsByClassName("expander");
+
+        Array.from(list).forEach(((exp) => {
+            let sx = Math.round(r * (Math.cos(theta)));
+            let sy = Math.round(r * (Math.sin(theta)));
+            let nx = Math.round(hover * (Math.cos(theta)));
+            let ny = Math.round(hover * (Math.sin(theta)));
+            let inc = 6.28 / list.length;
+            theta += inc;
+
+            exp.style.top = sy;
+            exp.style.left = sx;
+
+            exp.animate([{
+                top: sy + 'px',
+                left: sx + 'px',
+                transform: 'scale3d(0.2, 0.2, 1)'
+            }, {
+                top: nx + 'px',
+                left: ny + 'px',
+                transform: 'scale3d(3.0, 3.0, 1)'
+            }], {
+                duration: 3500,
+                easing: "ease-in-out",
+                fill: "forwards"
+            });
+        }));
+
+    </script>
+</body>
+
+</html>
